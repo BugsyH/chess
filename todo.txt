@@ -1,14 +1,13 @@
-Player Input: You need a way to get input from the user. This could be in the form of a command line input where the user enters the current position of the piece they want to move and the position they want to move it to.
+Player Input
 
-Move Validation: Once you have the player's desired move, you need to check if it's a valid move for that type of piece. This involves checking the rules of movement for each type of piece (e.g., a bishop can only move diagonally).
+Move Validation
 
-Game State Management: You need to keep track of the state of the game. This includes whose turn it is, whether the king is in check, and whether the game is over (either by checkmate or stalemate).
+Game State Management
 
-Move Execution: If the move is valid, you need to update the board to reflect the move. This involves removing the piece from its current position and placing it in the new position.
+Move Execution
 
-Display Board: After each move, you should display the updated board to the players.
+Display Board
 
-Here's a rough pseudocode outline of what the main game loop might look like:
 
 while game is not over:
     display board
