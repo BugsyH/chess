@@ -43,7 +43,7 @@ public class Piece {
         pieceBottom.append(squareType);
         switch (type) {
             case 'P':
-                pieceBottom.append("├Pw┤");
+                pieceBottom.append("├Pa┤");
                 break;
             case 'R':
                 pieceBottom.append("║Ro║");
