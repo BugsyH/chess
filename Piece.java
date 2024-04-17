@@ -58,7 +58,7 @@ public class Piece {
                 pieceBottom.append("╬Qu╬");
                 break;
             case 'K':
-                pieceBottom.append("■Kk■");
+                pieceBottom.append("■Ki■");
                 break;
             default:
                 pieceBottom.append("    ");
