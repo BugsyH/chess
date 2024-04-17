@@ -24,7 +24,7 @@ Implementing these features should give you a basic, playable chess game.
 structure
 
 Chess
-    handles inputs and game logic
+    handles inputs
 
 Player
     two player objects that move peices on their turn
@@ -36,7 +36,7 @@ Piece
     contains variables for position, type and colour
 
 Board
-    draws the current state of the board, handles moves
+    draws the current state of the board, handles moves and game logic
 
 
 next

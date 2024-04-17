@@ -4,11 +4,21 @@ public class Piece {
     private char type;
     private char squareType;
     private int[] position;
+    private boolean hasMoved;
     
     public Piece(char colour, char type, int[] position) {
         this.colour = colour;
         this.type = type;
         this.position = position;
+        this.hasMoved = false;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    public boolean getHasMoved() {
+        return hasMoved;
     }
     
     public String getTop() {
@@ -79,4 +89,5 @@ public class Piece {
                 return "Unknown";
         }
     }
+
 }

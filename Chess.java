@@ -1,25 +1,42 @@
 public class Chess {
     public static void main(String[] args) {
         Board board = new Board();
+        Board board2 = new Board();
         Player player1 = new Player("Player 1", 'W');
         Player player2 = new Player("Player 2", 'B');
+        GameState gameState = new GameState(player1);
         board.draw();
         board.listPositions();
 
-
-        while (true) {
-            // Player 1's turn
-            System.out.println(player1.getName() + "'s turn");
-            board.move(player1);
+        while (!gameState.isGameOver()) {
+            // Current player's turn
+            Player currentPlayer = gameState.getCurrentPlayer();
+            System.out.println(currentPlayer.getName() + "'s turn");
+            if (!gameState.isKingInCheck()) {
+                board.move(currentPlayer);
+            } else {
+                while (gameState.isKingInCheck()) {
+                        board2 = board;
+                        board2.moveCheck(currentPlayer);
+                        gameState.setKingInCheck(board2.isKingInCheck(currentPlayer.getColour()));
+                        if (gameState.isKingInCheck()) {
+                            System.out.println("Invalid move. Try again. [King is in check]");
+                        } else {
+                            board = board2;
+                        }
+                }
+            }
             board.draw();
             board.listPositions();
 
-            // Player 2's turn
-            System.out.println(player2.getName() + "'s turn");
-            board.move(player2);
-            board.draw();
-            board.listPositions();
+            // Check if the king is in check or the game is over
+            Player otherPlayer = currentPlayer == player1 ? player2 : player1;
+            board2 = board;
+            gameState.setKingInCheck(board.isKingInCheck(otherPlayer.getColour()));
+            gameState.setGameOver(board.isKingInCheckmate(currentPlayer.getColour()));
+
+            // Switch to the other player
+            gameState.switchPlayer(player1, player2);
         }
-
     }
 }
