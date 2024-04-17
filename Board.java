@@ -18,36 +18,35 @@ public class Board {
 
     public Board() {
         pieces = new Piece[8][8];
-
-        // Initialize the top two rows with white pieces
-        Piece[] whitePieces = {
-            new Piece('W', 'R', new int[]{0, 0}), new Piece('W', 'N', new int[]{0, 1}), new Piece('W', 'B', new int[]{0, 2}), new Piece('W', 'Q', new int[]{0, 3}), 
-            new Piece('W', 'K', new int[]{0, 4}), new Piece('W', 'B', new int[]{0, 5}), new Piece('W', 'N', new int[]{0, 6}), new Piece('W', 'R', new int[]{0, 7})
+    
+        // Initialize the top two rows with black pieces
+        Piece[] blackPieces = {
+            new Piece('B', 'R', new int[]{0, 0}), new Piece('B', 'N', new int[]{0, 1}), new Piece('B', 'B', new int[]{0, 2}), new Piece('B', 'Q', new int[]{0, 3}), 
+            new Piece('B', 'K', new int[]{0, 4}), new Piece('B', 'B', new int[]{0, 5}), new Piece('B', 'N', new int[]{0, 6}), new Piece('B', 'R', new int[]{0, 7})
         };
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 8; j++) {
-                pieces[i][j] = i == 0 ? whitePieces[j] : new Piece('W', 'P', new int[]{i, j});
+                pieces[i][j] = i == 0 ? blackPieces[j] : new Piece('B', 'P', new int[]{i, j});
             }
         }
-
+    
         // Initialize the middle four rows with null pieces
         for (int i = 2; i < 6; i++) {
             for (int j = 0; j < 8; j++) {
                 pieces[i][j] = null;
             }
         }
-
-        // Initialize the bottom two rows with black pieces
-        Piece[] blackPieces = {
-            new Piece('B', 'R', new int[]{7, 0}), new Piece('B', 'N', new int[]{7, 1}), new Piece('B', 'B', new int[]{7, 2}), new Piece('B', 'Q', new int[]{7, 3}), 
-            new Piece('B', 'K', new int[]{7, 4}), new Piece('B', 'B', new int[]{7, 5}), new Piece('B', 'N', new int[]{7, 6}), new Piece('B', 'R', new int[]{7, 7})
+    
+        // Initialize the bottom two rows with white pieces
+        Piece[] whitePieces = {
+            new Piece('W', 'R', new int[]{7, 0}), new Piece('W', 'N', new int[]{7, 1}), new Piece('W', 'B', new int[]{7, 2}), new Piece('W', 'Q', new int[]{7, 3}), 
+            new Piece('W', 'K', new int[]{7, 4}), new Piece('W', 'B', new int[]{7, 5}), new Piece('W', 'N', new int[]{7, 6}), new Piece('W', 'R', new int[]{7, 7})
         };
         for (int i = 6; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                pieces[i][j] = i == 7 ? blackPieces[j] : new Piece('B', 'P', new int[]{i, j});
+                pieces[i][j] = i == 7 ? whitePieces[j] : new Piece('W', 'P', new int[]{i, j});
             }
         }
-
     }
 
     // Draw the chess board
@@ -131,6 +130,9 @@ public class Board {
         StringBuilder whitePieces = new StringBuilder();
         StringBuilder blackPieces = new StringBuilder();
     
+        int whiteCounter = 0;
+        int blackCounter = 0;
+    
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (pieces[i][j] != null) {
@@ -141,22 +143,26 @@ public class Board {
     
                     if (color == 'W') {
                         whitePieces.append(piece);
+                        whiteCounter++;
+                        if (whiteCounter == 6) {
+                            whitePieces.append("\n");
+                            whiteCounter = 0;
+                        }
                     } else {
                         blackPieces.append(piece);
+                        blackCounter++;
+                        if (blackCounter == 6) {
+                            blackPieces.append("\n");
+                            blackCounter = 0;
+                        }
                     }
                 }
             }
         }
     
-        if (whitePieces.length() > 0) {
-            whitePieces.setLength(whitePieces.length() - 2);  // Remove the trailing comma and space
-        }
-        if (blackPieces.length() > 0) {
-            blackPieces.setLength(blackPieces.length() - 2);  // Remove the trailing comma and space
-        }
-    
-        System.out.println("White pieces: " + whitePieces);
-        System.out.println("Black pieces: " + blackPieces);
+        // Print the white and black pieces
+        System.out.println("White pieces: \n" + whitePieces.toString());
+        System.out.println("Black pieces: \n" + blackPieces.toString());
     }
 
     // Move a piece on the board
@@ -282,7 +288,7 @@ public class Board {
                 switch (type) {
                     case 'P':  // Pawn
                         // Pawns can only move forward one square or two squares on their first move, and can capture diagonally
-                        if (colour == 'W') {
+                        if (colour == 'B') {
                             if ((endRow - startRow == 1 || (!hasMoved && endRow - startRow == 2)) && startColumn == endColumn && pieces[endRow][endColumn] == null) {
                                 return true;
                             } else if (endRow - startRow == 1 && Math.abs(endColumn - startColumn) == 1 && pieces[endRow][endColumn] != null && pieces[endRow][endColumn].getColour() != colour) {
@@ -427,7 +433,7 @@ public class Board {
                     switch (type) {
                         case 'P':  // Pawn
                             // Pawns can only move forward one square or two squares on their first move, and can capture diagonally
-                            if (colour == 'W') {
+                            if (colour == 'B') {
                                 if ((endRow - startRow == 1 || (!hasMoved && endRow - startRow == 2)) && startColumn == endColumn && pieces[endRow][endColumn] == null) {
                                     return true;
                                 } else if (endRow - startRow == 1 && Math.abs(endColumn - startColumn) == 1 && pieces[endRow][endColumn] != null && pieces[endRow][endColumn].getColour() != colour) {

@@ -5,8 +5,9 @@ public class Chess {
         Player player1 = new Player("Player 1", 'W');
         Player player2 = new Player("Player 2", 'B');
         GameState gameState = new GameState(player1);
-        board.draw();
         board.listPositions();
+        board.draw();
+        
 
         while (!gameState.isGameOver()) {
             // Current player's turn
@@ -26,8 +27,9 @@ public class Chess {
                         }
                 }
             }
-            board.draw();
             board.listPositions();
+            board.draw();
+            
 
             // Check if the king is in check or the game is over
             Player otherPlayer = currentPlayer == player1 ? player2 : player1;
