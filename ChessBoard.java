@@ -3,14 +3,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
 
 public class ChessBoard extends GridPane {
     private static final char HORIZONTAL = '\u2550';
@@ -27,7 +24,6 @@ public class ChessBoard extends GridPane {
     private static final char DARK_SQUARE = '\u2593';
     private static final char LIGHT_SQUARE = '\u2591';
     private Piece[][] pieces;
-    private TextArea textArea = new TextArea();
     private TextFlow textFlow = new TextFlow();
     Piece lastSelectedPiece = null;
 

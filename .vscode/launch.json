@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Chess",
+            "request": "launch",
+            "mainClass": "Chess",
+            "projectName": "chess_8a724956"
+        },
+        {
+            "type": "java",
             "name": "ChessBoard",
             "request": "launch",
             "mainClass": "ChessBoard",
